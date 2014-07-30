@@ -20,7 +20,7 @@ def toHex(s):
 
 def inttohexstr(x, length = 4):
     if ( x > 4294967295 ): # Boy, do you have a large library!
-        x = 4294967295
+        x = 4294967295 # Probably redundant..
     length = length * 2
     return hex(x).split("x")[1].zfill(length)
 
@@ -28,17 +28,17 @@ def inttohexstr(x, length = 4):
 def printhex(s):
     return ":".join("{:02x}".format(ord(c)) for c in s)
 
-def readResponse( fullMessage = False):
+def readResponse( serial, fullMessage = False):
     ret = ()
     sleep(.15) # need to wait a while, just in case..
-    while ser.inWaiting():
-        if ser.read(2) == "ff55".decode("hex"):
-            length = ser.read(1)
-            lingo = ser.read()
-            body = ser.read(int(toHex(length), 16)-1)
-            checksum = ser.read()
+    while serial.inWaiting():
+        if serial.read(2) == "ff55".decode("hex"):
+            length = serial.read(1)
+            lingo = serial.read()
+            body = serial.read(int(toHex(length), 16)-1)
+            checksum = serial.read()
             message = "ff55".decode("hex") + length + lingo + body + checksum
-            if general.mkcmd(int(toHex(lingo)), toHex(body)) == message:
+            if mkcmd(int(toHex(lingo)), toHex(body)) == message:
                 if not fullMessage:
                     ret = ret + (body,)
                 else:
