@@ -14,7 +14,7 @@ Circut:
              +--| 33k |---+---| 47k |--+                                 # Read
              |                                                           # more
              +--| 33k |---+---| 22k |--+                                 # at
-             |            |            |                                 # http://pinouts.ru/PortableDevices/ipod_pinout.shtml
+             |            |            |                                 # pinouts.ru/PortableDevices/ipod_pinout.shtml
              |            |            +------ pin 15 (GND)              #
              |            |                                              #
              |            +------------------- pin 25 (data-)            #
